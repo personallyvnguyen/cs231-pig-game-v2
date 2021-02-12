@@ -5,6 +5,10 @@
 #  - Cabrera, James
 #  - Nguyen, Van 
 # In-class activity: Game of Pig Version 2
+#
+# Extra Features:
+#  - Added yolo option (Van).
+#  - Added roll type "Zombie Runner" (James).
 
 
 import random   
@@ -31,6 +35,7 @@ class Pig():
     # * Index 1: Oinker - Reset to 0
     # * Index 2: Piggyback - Instant Lose
     _TOUCH_WEIGHTS = (80, 19, 1)
+
 
     # Roll weights add up to 100. Single/Double points.
     #
