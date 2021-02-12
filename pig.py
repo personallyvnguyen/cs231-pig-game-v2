@@ -99,12 +99,14 @@ class Pig():
         while turn_active:
             print(f'Your turn, {self._players[self._turn_state]["name"]}\n')
 
-            turn_choice = input(INDENT + 'ROLL or PASS? ').lower()
+            turn_choice = input(INDENT + 'ROLL, PASS, or YOLO? ').lower()
             
             if turn_choice == 'roll':
                 turn_active = self._roll_choice()
             elif turn_choice == 'pass':
                 turn_active = self._pass_choice()
+            elif turn_choice == 'yolo':
+                turn_active = self._yolo_choice()
 
             self._print_score()
 
@@ -177,6 +179,30 @@ class Pig():
         
         return False
 
+
+    def _yolo_choice(self) -> bool:
+        '''
+        Executes the logic for a YOLO. The player gets a 50/50 chance
+        of getting exactly the amount of points they need to win or
+        getting kicked out of the game.
+        '''
+
+        yolo_result = random.choices(range(2), weights=(50, 50))[0]
+
+        if yolo_result == 0:
+            self._players[self._turn_state]['score'] = self._win_score
+            print_indented(
+                f'Your YOLO paid off! You now have {self._win_score} points')
+                
+            return True
+        else:
+            self._players[self._turn_state]['score'] = 'LOST'
+            print_indented(
+                f'Your YOLO failed! You are out of the game')
+
+            self._next_player()
+            return False
+        
 
     def _end_game(self) -> None:
         'Prints the end score and the winner of the game.'
