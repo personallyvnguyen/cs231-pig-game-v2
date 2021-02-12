@@ -32,16 +32,15 @@ class Pig():
     # * Index 2: Piggyback - Instant Lose
     _TOUCH_WEIGHTS = (80, 19, 1)
 
-
-    # Weights chosen by adding 13 to each singles' score. As a result,
-    # the converted scores add up to 100. Single/Double points.
+    # Roll weights add up to 100. Single/Double points.
     #
-    # * Index 0: Sider - 0/1 pts
-    # * Index 1: Razorback - 5/20 pts
-    # * Index 2: Trotter - 5/20 pts
-    # * Index 3: Snouter - 10/40 pts
-    # * Index 4: Leaning Jowler - 15/60 pts
-    _ROLL_WEIGHTS = (13, 18, 18, 23, 28)
+    # * Index 0: Sider, 0/1 pts
+    # * Index 1: Razorback, 5/20 pts
+    # * Index 2: Trotter, 5/20 pts
+    # * Index 3: Snouter, 10/40 pts
+    # * Index 4: Leaning Jowler, 15/60 pts
+    # * Index 5: Zombie Runner, -10/-30 pts
+    _ROLL_WEIGHTS = (10, 15, 15, 23, 28, 9)
 
 
     _ROLL_TYPES = (
@@ -50,6 +49,7 @@ class Pig():
         ('Trotter', 5, 20),
         ('Snouter', 10, 40),
         ('Leaning Jowler', 15, 60),
+        ('Zombie Runner', -10, -30),
     )
 
 
@@ -239,7 +239,7 @@ class Pig():
         weights.
         '''
 
-        return random.choices(range(5), weights=Pig._ROLL_WEIGHTS)[0]
+        return random.choices(range(6), weights=Pig._ROLL_WEIGHTS)[0]
 
     
     def _next_player(self) -> None:
